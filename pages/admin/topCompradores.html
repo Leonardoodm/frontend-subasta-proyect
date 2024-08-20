@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AuctionX</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="../../assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/NuestroIcono.webp">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css/templatemo.css">
+    <link rel="stylesheet" href="../../assets/css/custom.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="../../assets/css/fontawesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <nav id="navBarAdm" class="navbar navbar-expand-lg navbar-light shadow">
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Top 5 Compradores por Mes</h2>
+        <div class="d-flex justify-content-center align-items-center mb-3">
+            <button id="prevMonth" class="btn btn-primary">&larr; Mes Anterior</button>
+            <h3 id="monthLabel" class="mx-3">Enero</h3>
+            <button id="nextMonth" class="btn btn-primary">Mes Siguiente &rarr;</button>
+        </div>
+        <canvas id="buyersChart"></canvas>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footerAdm" class="bg-dark" id="tempaltemo_footer">
+    </footer>
+
+    <!-- Start Script -->
+    <script src="../../assets/js/jquery-1.11.0.min.js"></script>
+    <script src="../../assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/templatemo.js"></script>
+    <script src="../../assets/js/custom.js"></script>
+    <script type="module" src="../../assets/javaScript.js"></script>
+    <!-- End Script -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const ctx = document.getElementById('buyersChart').getContext('2d');
+            const monthLabel = document.getElementById('monthLabel');
+            const prevMonthButton = document.getElementById('prevMonth');
+            const nextMonthButton = document.getElementById('nextMonth');
+
+            const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto'];
+            const data = {
+                'Enero': { buyers: ['Comprador A', 'Comprador B', 'Comprador C', 'Comprador D', 'Comprador E'], amounts: [5000, 7000, 8000, 6000, 9000] },
+                'Febrero': { buyers: ['Comprador F', 'Comprador G', 'Comprador H', 'Comprador I', 'Comprador J'], amounts: [6000, 8000, 9000, 7000, 10000] },
+                'Marzo': { buyers: ['Comprador K', 'Comprador L', 'Comprador M', 'Comprador N', 'Comprador O'], amounts: [7000, 9000, 10000, 8000, 11000] },
+                'Abril': { buyers: ['Comprador P', 'Comprador Q', 'Comprador R', 'Comprador S', 'Comprador T'], amounts: [8000, 10000, 11000, 9000, 12000] },
+                'Mayo': { buyers: ['Comprador U', 'Comprador V', 'Comprador W', 'Comprador X', 'Comprador Y'], amounts: [9000, 11000, 12000, 10000, 13000] },
+                'Junio': { buyers: ['Comprador Z', 'Comprador AA', 'Comprador BB', 'Comprador CC', 'Comprador DD'], amounts: [10000, 12000, 13000, 11000, 14000] },
+                'Julio': { buyers: ['Comprador EE', 'Comprador FF', 'Comprador GG', 'Comprador HH', 'Comprador II'], amounts: [11000, 13000, 14000, 12000, 15000] },
+                'Agosto': { buyers: ['Comprador JJ', 'Comprador KK', 'Comprador LL', 'Comprador MM', 'Comprador NN'], amounts: [6000, 4000, 5500, 4600, 5300] },
+            };
+            let currentMonthIndex = 0;
+
+            const updateChart = (month) => {
+                buyersChart.data.labels = data[month].buyers;
+                buyersChart.data.datasets[0].data = data[month].amounts;
+                buyersChart.update();
+                monthLabel.textContent = month;
+            };
+
+            const buyersChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data[months[currentMonthIndex]].buyers,
+                    datasets: [{
+                        label: 'Total Comprado',
+                        data: data[months[currentMonthIndex]].amounts,
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 99, 132, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+
+            prevMonthButton.addEventListener('click', () => {
+                if (currentMonthIndex > 0) {
+                    currentMonthIndex -= 1;
+                    updateChart(months[currentMonthIndex]);
+                }
+            });
+
+            nextMonthButton.addEventListener('click', () => {
+                if (currentMonthIndex < months.length - 1) {
+                    currentMonthIndex += 1;
+                    updateChart(months[currentMonthIndex]);
+                }
+            });
+
+            updateChart(months[currentMonthIndex]); // Initial chart update
+        });
+    </script>
+</body>
+
+</html>

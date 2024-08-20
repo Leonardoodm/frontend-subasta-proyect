@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AuctionX</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="../../assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/NuestroIcono.webp">
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css/templatemo.css">
+    <link rel="stylesheet" href="../../assets/css/custom.css">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="../../assets/css/fontawesome.min.css">
+    <style>
+        .card-img-top {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card-link:hover {
+            text-decoration: none;
+        }
+
+        .border {
+            border: 1px solid #dee2e6 !important;
+        }
+
+        .legend {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .modal-header {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .modal-header .close {
+            color: white;
+        }
+
+        fieldset {
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <nav id="navBarSeller" class="navbar navbar-expand-lg navbar-light shadow">
+    </nav>
+
+    <!-- Botón Crear Producto -->
+    <div class="container mt-5">
+        <button class="btn btn-primary mb-3" id="createProductButton" data-toggle="modal"
+            data-target="#createProductModal">Crear Producto</button>
+        <div class="row" id="productos-container">
+        </div>
+    </div>
+
+    <!-- Ver Producto Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Detalles del Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <!-- Editar Producto Modal -->
+<div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="editProductModalLabel">Editar Producto</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editProductForm">
+                    <input type="hidden" id="editProductId">
+
+                    <!-- Información General -->
+                    <fieldset class="border p-3 mb-4">
+                        <legend class="w-auto px-2">Información General</legend>
+                            <div class="form-group ">
+                                <label for="editModelo">Modelo</label>
+                                <input type="text" class="form-control" id="editModelo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editMarca">Marca</label>
+                                <input list="editMarcaOptions" class="form-control" id="editMarca" required>
+                                <datalist id="editMarcaOptions">
+                                    <option value="Nike">
+                                    <option value="Adidas">
+                                    <option value="Puma">
+                                    <option value="Jordan">
+                                    <option value="Reebok">
+                                    <option value="New Balance">
+                                    <option value="Converse">
+                                    <option value="Under Armour">
+                                    <option value="Asics">
+                                    <option value="Vans">
+                                </datalist>
+                            </div>
+                        <div class="form-group">
+                            <label for="editDescripcion">Descripción</label>
+                            <input type="text" class="form-control" id="editDescripcion" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editTalla">Talla</label>
+                            <input type="text" class="form-control" id="editTalla" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editTipo">Tipo</label>
+                            <select class="form-control" id="editTipo" required>
+                                <option value="H">Hombre</option>
+                                <option value="M">Mujer</option>
+                                <option value="NH">Niño</option>
+                                <option value="NM">Niña</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="editStatus">Status</label>
+                            <select class="form-control" id="editStatus" required>
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <!-- Identificación del Producto -->
+                    <fieldset class="border p-3 mb-4">
+                        <legend class="w-auto px-2">Identificación del Producto</legend>
+                        <div class="form-group pb-2">
+                            <label for="editFoto">Foto del Producto</label>
+                            <input type="file" class="form-control-file" id="editFoto" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <label for="editCodigoCaja">Código de la Caja del Producto</label>
+                            <input type="text" class="form-control" id="editCodigoCaja" value="58sw9a4658544668532">
+                        </div>
+                        <div class="form-group">
+                            <label for="editCodigoProducto">Código del Producto</label>
+                            <input type="text" class="form-control" id="editCodigoProducto" value="85456a4q335631234" >
+                        </div>
+                    </fieldset>
+
+                    <!-- Certificación y Compra -->
+                    <fieldset class="border p-3 mb-4">
+                        <legend class="w-auto px-2">Certificación y Compra</legend>
+                        <div class="form-group pb-2">
+                            <label for="editCertificado">¿Cuenta con Certificado?</label>
+                            <select class="form-control" id="editCertificado"  onchange="toggleEditCertificado()">
+                                <option value="no">No</option>
+                                <option value="si">Sí</option>
+                            </select>
+                        </div>
+                        <div id="editCertificadoUpload" style="display: none;">
+                            <div class="form-group pb-2">
+                                <label for="editCertificadoArchivo">Subir Certificado</label>
+                                <input type="file" class="form-control-file" id="editCertificadoArchivo" accept="image/*">
+                            </div>
+                        </div>
+                        <div class="form-group pb-2">
+                            <label for="editTicketCompra">Subir Ticket de Compra</label>
+                            <input type="file" class="form-control-file" id="editTicketCompra" accept="image/*">
+                        </div>
+                    </fieldset>
+
+                   
+
+                    <button type="submit" class="btn btn-primary btn-block">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Crear Producto Modal -->
+    <div class="modal fade" id="createProductModal" tabindex="-1" role="dialog"
+        aria-labelledby="createProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="createProductModalLabel">Crear Producto</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="createProductForm">
+                        <!-- Información General -->
+                        <fieldset class="border p-3 mb-4">
+                            <legend class="w-auto px-2">Información General</legend>
+
+                            <div class="form-group">
+                                <label for="createModelo">Modelo</label>
+                                <input type="text" class="form-control" id="createModelo" required>
+
+                                <label for="createMarca">Marca</label>
+                                <input list="marcaOptions" class="form-control" id="createMarca" required>
+                                <datalist id="marcaOptions">
+                                    <option value="Nike">
+                                    <option value="Adidas">
+                                    <option value="Puma">
+                                    <option value="Jordan">
+                                    <option value="Reebok">
+                                    <option value="New Balance">
+                                    <option value="Converse">
+                                    <option value="Under Armour">
+                                    <option value="Asics">
+                                    <option value="Vans">
+                                </datalist>
+                            </div>
+                            <div class="form-group">
+                                <label for="createDescripcion">Descripción</label>
+                                <input type="text" class="form-control" id="createDescripcion" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="createTalla">Talla</label>
+                                <input type="text" class="form-control" id="createTalla" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="createTipo">Tipo</label>
+                                <select class="form-control" id="createTipo" required>
+                                    <option value="H">Hombre</option>
+                                    <option value="M">Mujer</option>
+                                    <option value="NH">Niño</option>
+                                    <option value="NM">Niña</option>
+                                </select>
+                            </div>
+                        </fieldset>
+
+
+                        <!-- Identificación del Producto -->
+                        <fieldset class="border p-3 mb-4">
+                            <legend class="w-auto px-2">Identificación del Producto</legend>
+                            <div class="form-group pb-2">
+                                <label for="createFoto">Foto del Producto</label>
+                                <input type="file" class="form-control-file" id="createFoto" accept="image/*" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="createCodigoCaja">Código de la Caja del Producto</label>
+                                <input type="text" class="form-control" id="createCodigoCaja" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="createCodigoProducto">Código del Producto</label>
+                                <input type="text" class="form-control" id="createCodigoProducto" required>
+                            </div>
+                        </fieldset>
+
+                        <!-- Certificación y Compra -->
+                        <fieldset class="border p-3 mb-4">
+                            <legend class="w-auto px-2">Certificación y Compra</legend>
+                            <div class="form-group pb-2">
+                                <label for="createCertificado">¿Cuenta con Certificado?</label>
+                                <select class="form-control" id="createCertificado" required
+                                    onchange="toggleCertificado()">
+                                    <option value="no">No</option>
+                                    <option value="si">Sí</option>
+                                </select>
+                            </div>
+                            <div id="certificadoUpload" style="display: none;">
+                                <div class="form-group pb-2 pt-2">
+                                    <label for="createCertificadoArchivo">Subir Certificado</label>
+                                    <input type="file" class="form-control-file" id="createCertificadoArchivo"
+                                        accept="image/*">
+                                </div>
+                            </div>
+                            <div class="form-group pb-2 pt-2">
+                                <label for="createTicketCompra">Subir Ticket de Compra</label>
+                                <input type="file" class="form-control-file" id="createTicketCompra" accept="image/*"
+                                    required>
+                            </div>
+                        </fieldset>
+
+                        <button type="submit" class="btn btn-primary btn-block">Crear Producto</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Crear Subasta Modal -->
+    <div class="modal fade" id="createAuctionModal" tabindex="-1" role="dialog"
+        aria-labelledby="createAuctionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createAuctionModalLabel">Crear Subasta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="createAuctionForm">
+                        <input type="hidden" id="auctionProductId">
+                        <div class="form-group">
+                            <label for="auctionPrice">Precio Estimado</label>
+                            <input type="number" class="form-control" id="auctionPrice" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Crear Subasta</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footerSeller" class="bg-dark" id="tempaltemo_footer">
+    </footer>
+
+    <script>
+        function toggleCertificado() {
+            var certificadoSelect = document.getElementById("createCertificado");
+            var certificadoUpload = document.getElementById("certificadoUpload");
+            if (certificadoSelect.value === "si") {
+                certificadoUpload.style.display = "block";
+            } else {
+                certificadoUpload.style.display = "none";
+            }
+        }
+
+        function toggleEditCertificado() {
+        var certificadoSelect = document.getElementById("editCertificado");
+        var certificadoUpload = document.getElementById("editCertificadoUpload");
+        if (certificadoSelect.value === "si") {
+            certificadoUpload.style.display = "block";
+        } else {
+            certificadoUpload.style.display = "none";
+        }
+    }
+    </script>
+
+    <!-- Start Script -->
+    <script src="../../assets/js/jquery-1.11.0.min.js"></script>
+    <script src="../../assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/templatemo.js"></script>
+    <script src="../../assets/js/custom.js"></script>
+    <script type="module" src="../../assets/javaScript.js"></script>
+
+</body>
+
+</html>

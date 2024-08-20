@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AuctionX</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="../../assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/NuestroIcono.webp">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css/templatemo.css">
+    <link rel="stylesheet" href="../../assets/css/custom.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="../../assets/css/fontawesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <nav id="navBarAdm" class="navbar navbar-expand-lg navbar-light shadow">
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Ventas por Mes</h2>
+        <div class="d-flex justify-content-center align-items-center mb-3">
+            <button id="prevYear" class="btn btn-primary">&larr; Año Anterior</button>
+            <h3 id="yearLabel" class="mx-3">2021</h3>
+            <button id="nextYear" class="btn btn-primary">Año Siguiente &rarr;</button>
+        </div>
+        <canvas id="salesChart"></canvas>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footerAdm" class="bg-dark" id="tempaltemo_footer">
+    </footer>
+
+    <!-- Start Script -->
+    <script src="../../assets/js/jquery-1.11.0.min.js"></script>
+    <script src="../../assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/templatemo.js"></script>
+    <script src="../../assets/js/custom.js"></script>
+    <script type="module" src="../../assets/javaScript.js"></script>
+    <!-- End Script -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const ctx = document.getElementById('salesChart').getContext('2d');
+            const yearLabel = document.getElementById('yearLabel');
+            const prevYearButton = document.getElementById('prevYear');
+            const nextYearButton = document.getElementById('nextYear');
+
+            const data = {
+                '2021': [50, 40, 45, 35, 30, 40, 50, 55, 60, 65, 70, 75],
+                '2022': [80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135],
+                '2023': [140, 145, 150, 155, 160, 165, 170, 175, 180, 185, 190, 195],
+                '2024': [200, 205, 210, 215, 220, 225, 230, 80] // hasta agosto
+            };
+
+            let currentYear = 2021;
+
+            const updateChart = (year) => {
+                salesChart.data.labels = year === 2024 ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'] : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                salesChart.data.datasets[0].data = data[year];
+                salesChart.update();
+                yearLabel.textContent = year;
+            };
+
+            const salesChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Ventas',
+                        data: data[currentYear],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            suggestedMin: 20,
+                            suggestedMax: 250
+                        }
+                    },
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+
+            prevYearButton.addEventListener('click', () => {
+                if (currentYear > 2021) {
+                    currentYear -= 1;
+                    updateChart(currentYear);
+                }
+            });
+
+            nextYearButton.addEventListener('click', () => {
+                if (currentYear < 2024) {
+                    currentYear += 1;
+                    updateChart(currentYear);
+                }
+            });
+
+            updateChart(currentYear); // Initial chart update
+        });
+    </script>
+</body>
+
+</html>

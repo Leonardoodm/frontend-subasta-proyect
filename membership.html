@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AuctionX</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/NuestroIcono.webp">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <style>
+        .membership-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .membership-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .membership-card-header {
+            background-color: #8e44ad;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .membership-card-header h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .membership-card-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .membership-card-body ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .membership-card-body ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .membership-card-body .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #8e44ad;
+        }
+
+        .membership-card-footer {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .membership-card-footer a {
+            background-color: #8e44ad;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .membership-card-footer a:hover {
+            background-color: #732d91;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <nav id="navBar" class="navbar navbar-expand-lg navbar-light shadow">
+        <!-- Otros elementos del navbar -->
+        <ul class="navbar-nav ml-auto">
+            <!-- Otros elementos del navbar -->
+            <li class="nav-item">
+                <a class="nav-link" href="#membership">Membresías</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Modal Container Login -->
+    <div id="modal-container"></div>
+    <!-- Close Header -->
+
+    <!-- Membresías -->
+    <div class="container mt-5" id="membership">
+        <h2 class="text-center">Membresías</h2>
+        <div class="row">
+            <!-- Membresía Básica -->
+            <div class="col-md-4">
+                <div class="membership-card">
+                    <div class="membership-card-header">
+                        <h3>Basic</h3>
+                    </div>
+                    <div class="membership-card-body">
+                        <div class="price">$9.99/mes</div>
+                        <ul>
+                            <li>Acceso a ofertas exclusivas</li>
+                            <li>Descuentos del 5% en productos seleccionados</li>
+                            <li>Participación en sorteos mensuales</li>
+                        </ul>
+                    </div>
+                    <div class="membership-card-footer">
+                        <a href="#">Learn more</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Membresía Premium -->
+            <div class="col-md-4">
+                <div class="membership-card">
+                    <div class="membership-card-header">
+                        <h3>Premium</h3>
+                    </div>
+                    <div class="membership-card-body">
+                        <div class="price">$19.99/mes</div>
+                        <ul>
+                            <li>Todos los beneficios de la Membresía Básica</li>
+                            <li>Descuentos del 10% en todos los productos</li>
+                            <li>Envío gratuito en órdenes superiores a $50</li>
+                            <li>Atención al cliente prioritaria</li>
+                        </ul>
+                    </div>
+                    <div class="membership-card-footer">
+                        <a href="#">Learn more</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Membresía VIP -->
+            <div class="col-md-4">
+                <div class="membership-card">
+                    <div class="membership-card-header">
+                        <h3>Pro</h3>
+                    </div>
+                    <div class="membership-card-body">
+                        <div class="price">$29.99/mes</div>
+                        <ul>
+                            <li>Todos los beneficios de la Membresía Premium</li>
+                            <li>Descuentos del 15% en todos los productos</li>
+                            <li>Acceso a productos exclusivos</li>
+                            <li>Invitaciones a eventos especiales</li>
+                        </ul>
+                    </div>
+                    <div class="membership-card-footer">
+                        <a href="#">Learn more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start Footer -->
+    <footer id="footer" class="bg-dark" id="tempaltemo_footer">
+        <!-- Aquí se cargarán los elementos del footer -->
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Start Script -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/templatemo.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script type="module" src="assets/javaScript.js"></script>
+    <!-- End Script -->
+</body>
+
+</html>

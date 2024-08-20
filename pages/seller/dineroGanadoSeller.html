@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AuctionX</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="../../assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/NuestroIcono.webp">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css/templatemo.css">
+    <link rel="stylesheet" href="../../assets/css/custom.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="../../assets/css/fontawesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <nav id="navBarSeller" class="navbar navbar-expand-lg navbar-light shadow"></nav>
+
+    <div class="container mt-5">
+        <h2>Dinero Ganado por Mes</h2>
+        <div class="d-flex justify-content-center align-items-center mb-3">
+            <button id="prevYear" class="btn btn-primary">&larr; Año Anterior</button>
+            <h3 id="yearLabel" class="mx-3">2022</h3>
+            <button id="nextYear" class="btn btn-primary">Año Siguiente &rarr;</button>
+        </div>
+        <canvas id="earningsChart"></canvas>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footerSeller" class="bg-dark" id="tempaltemo_footer"></footer>
+    </footer>
+
+    <!-- Start Script -->
+    <script src="../../assets/js/jquery-1.11.0.min.js"></script>
+    <script src="../../assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/templatemo.js"></script>
+    <script src="../../assets/js/custom.js"></script>
+    <script type="module" src="../../assets/javaScript.js"></script>
+    <!-- End Script -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const ctx = document.getElementById('earningsChart').getContext('2d');
+            const yearLabel = document.getElementById('yearLabel');
+            const prevYearButton = document.getElementById('prevYear');
+            const nextYearButton = document.getElementById('nextYear');
+
+            const data = {
+                // '2021': [35000, 60000, 48000, 55000, 50000, 45000, 47000, 62000, 70000, 75000, 73000, 82000],
+                '2022': [85000, 87000, 86000, 88000, 91000, 95000, 92000, 89000, 93000, 94000, 97000, 99000],
+                '2023': [100000, 105000, 102000, 108000, 110000, 107000, 112000, 115000, 113000, 117000, 118000, 119000],
+                '2024': [119000, 115000, 112000, 118000, 119000, 116000, 120000, 60000] // hasta agosto
+            };
+
+            let currentYear = 2022;
+
+            const updateChart = (year) => {
+                earningsChart.data.labels = year === 2024 ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'] : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                earningsChart.data.datasets[0].data = data[year];
+                earningsChart.update();
+                yearLabel.textContent = year;
+            };
+
+            const earningsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Dinero Ganado',
+                        data: data[currentYear],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            suggestedMin: 20000,
+                            suggestedMax: 120000
+                        }
+                    },
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+
+            prevYearButton.addEventListener('click', () => {
+                if (currentYear > 2022) {
+                    currentYear -= 1;
+                    updateChart(currentYear);
+                }
+            });
+
+            nextYearButton.addEventListener('click', () => {
+                if (currentYear < 2024) {
+                    currentYear += 1;
+                    updateChart(currentYear);
+                }
+            });
+
+            updateChart(currentYear); // Initial chart update
+        });
+    </script>
+</body>
+
+</html>

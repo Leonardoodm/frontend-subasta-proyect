@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AuctionX</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="../../assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/NuestroIcono.webp">
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css/templatemo.css">
+    <link rel="stylesheet" href="../../assets/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="../../assets/css/fontawesome.min.css">
+    <style>
+        .card-img-top {
+            width: 100%;
+            height: 200px; /* Altura fija para todas las imágenes */
+            object-fit: contain;
+        }
+        .card-title {
+            font-size: 1.2rem; /* Tamaño de fuente uniforme para todos los títulos */
+        }
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .card-link:hover {
+            text-decoration: none; /* Asegura que no se subraye al pasar el ratón por encima */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <nav id="navBarAdm" class="navbar navbar-expand-lg navbar-light shadow">
+        <!-- Aquí se cargarán los elementos del navbar -->
+    </nav>
+
+      <!-- Main Content -->
+      <div class="container my-5">
+        <div class="row text-center">
+
+            <!-- Mostrar Productos -->
+            <div class="col-md-3">
+                <a href="/pages/admin/usuarios.html" class="card-link">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="../../assets/img/usuarios.PNG" class="card-img-top" alt="Mostrar Productos">
+                        <div class="card-body">
+                            <h5 class="card-title">Usuarios</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Mostrar Subastas Todas -->
+            <div class="col-md-3">
+                <a href="/pages/admin/mostrarAllSubastas.html" class="card-link">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="../../assets/img/mostrarSubastas.PNG" class="card-img-top" alt="Mostrar Subastas Todas">
+                        <div class="card-body">
+                            <h5 class="card-title">Subastas</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Mostrar Subastas por Aceptar -->
+            <div class="col-md-3">
+                <a href="/pages/admin/subastasAdmAceptar.html" class="card-link">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="../../assets/img/validarSneaker.PNG" class="card-img-top" alt="Mostrar Subastas por Aceptar">
+                        <div class="card-body">
+                            <h5 class="card-title">Subastas por Aceptar</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Mostrar Subastas Canceladas -->
+            <div class="col-md-3">
+                <a href="/pages/admin/subastasAdmCancelar.html" class="card-link">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="../../assets/img/subastasCanceladas.PNG" class="card-img-top" alt="Mostrar Subastas Canceladas">
+                        <div class="card-body">
+                            <h5 class="card-title">Subastas Canceladas</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Dinero Ganado -->
+            <div class="col-md-3">
+                <a href="/pages/admin/dineroGanado.html" class="card-link">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="../../assets/img/dineroGanado.PNG" class="card-img-top" alt="Dinero Ganado">
+                        <div class="card-body">
+                            <h5 class="card-title">Dinero Ganado</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Ventas por Mes -->
+            <div class="col-md-3">
+                <a href="/pages/admin/ventasMes.html" class="card-link">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="../../assets/img/ventasXMes.PNG" class="card-img-top" alt="Ventas por Mes">
+                        <div class="card-body">
+                            <h5 class="card-title">Ventas por Mes</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Mejores Compradores -->
+            <div class="col-md-3">
+                <a href="/pages/admin/topCompradores.html" class="card-link">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="../../assets/img/mejoresCompradores.PNG" class="card-img-top" alt="Mejores Compradores">
+                        <div class="card-body">
+                            <h5 class="card-title">Top Compradores</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Vendedores con más Tenis Subidos -->
+            <div class="col-md-3">
+                <a href="/pages/admin/topVendedores.html" class="card-link">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="../../assets/img/mejoresSellers.PNG" class="card-img-top" alt="Vendedores con más Tenis Subidos">
+                        <div class="card-body">
+                            <h5 class="card-title">Top Vendedores</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footerAdm" class="bg-dark" id="tempaltemo_footer">
+        <!-- Aquí se cargarán los elementos del footer -->
+    </footer>
+
+    <!-- Start Script -->
+    <script src="../../assets/js/jquery-1.11.0.min.js"></script>
+    <script src="../../assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/templatemo.js"></script>
+    <script src="../../assets/js/custom.js"></script>
+    <script type="module" src="../../assets/javaScript.js"></script>
+    <!-- End Script -->
+
+</body>
+
+</html>
